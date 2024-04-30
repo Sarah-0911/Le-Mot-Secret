@@ -4,13 +4,16 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-color: #f3d2c1;
+  background-color: #607274;
 }
 
 h1 {
   font-family: "Schibsted Grotesk", sans-serif;
-  color: #001858;
+  color: #fffbf1;
   text-align: center;
+  font-variant: small-caps;
+  letter-spacing: .3rem;
+  font-size: 2.4rem;
 }
 
 .main-container {
@@ -19,7 +22,7 @@ h1 {
   margin: 0 auto;
   width: 80vw;
   height: 80vh;
-  background-color: #fef6e4;
+  background-color: #FAEED1;
 }
 
 .words-container {
@@ -30,8 +33,7 @@ h1 {
   gap: 16px;
   margin-top: 20px;
   height: 40%;
-  /* border: 2px solid #001858; */
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   border-radius: 4px;
 }
 
@@ -41,9 +43,8 @@ h1 {
   align-items: center;
   gap: 4px;
   height: 12vh;
-  padding: 0 40px;
+  padding: 10px 40px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
 }
 
 .box {
@@ -54,9 +55,9 @@ h1 {
   width: 46px;
   height: 70%;
   border-radius: 2px;
-  background-color: #8bd3dd;
+  background-color: #fffbf1;
   font-size: 1.8rem;
-  color: #001858;
+  color: #607274;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
 
 .input-container {
@@ -78,4 +79,7 @@ h1 {
   font-size: 1.2rem;
   justify-content: center;
   align-items: center;
+  background-color: #B2A59B;
+  border-color: #B2A59B;
+  border-radius: 2px;
 }
