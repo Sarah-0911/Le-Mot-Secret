@@ -8,22 +8,25 @@
 </head>
 <body>
  <h1>secret word</h1>
- <div class="main-container">
-  <div class="words-container">
-    <div class="words-boxes">
-      <div class="box">.</div>
-      <div class="box">.</div>
-      <div class="box">.</div>
-      <div class="box">.</div>
-      <div class="box">.</div>
-      <div class="box">.</div>
+ <main class="main-container">
+  <div class="game-container">
+    <div class="words-grid">
+      <div class="word">
+        <div class="letter">.</div>
+        <div class="letter">.</div>
+        <div class="letter">.</div>
+        <div class="letter">.</div>
+        <div class="letter">.</div>
+        <div class="letter">.</div>
+      </div>
+      <div class="add-word"></div>
     </div>
-    <div class="input-container">
-      <input class="word-input" type="text" placeholder="Find the Word...">
-      <button type="submit">🥸</button>
-    </div>
+    <form class="new-words">
+      <input name="word" type="text" placeholder="">
+      <button id="submit" type="submit">🥸</button>
+    </form>
   </div>
- </div>
+</main>
  <script src="script.js"></script>
 </body>
 </html>

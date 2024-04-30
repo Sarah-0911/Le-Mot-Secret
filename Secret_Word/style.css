@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap');
+
 body {
   box-sizing: border-box;
   padding: 0;
@@ -23,10 +25,9 @@ h1 {
   height: 80vh;
   background-color: #9c92a3;
   border-radius: 4px;
-
 }
 
-.words-container {
+.game-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +39,7 @@ h1 {
   border-radius: 4px;
 }
 
-.words-boxes {
+.word {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,10 +49,9 @@ h1 {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   background-color: #fffea0;
   border-radius: 4px;
-  ;
 }
 
-.box {
+.letter {
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -60,23 +60,27 @@ h1 {
   height: 70%;
   border-radius: 2px;
   background-color: #fffbf1;
+  font-family: "Schibsted Grotesk", sans-serif;
+  font-weight: 500;
   font-size: 1.8rem;
   color: #3C3744;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  text-transform: uppercase;
+}
 
-.input-container {
+.new-words {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
-.input-container input {
+.new-words input {
   width: 100%;
   height: 40px;
   font-size: 1.2rem;
 }
 
-.input-container button {
+.new-words button {
   display: flex;
   width: 46px;
   height: 46px;
@@ -86,4 +90,10 @@ h1 {
   background-color: #3c3744;
   border-color: #3c3744;
   border-radius: 2px;
+}
+
+.input-word {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 14px;
 }
