@@ -4,19 +4,22 @@ const wordContainer = document.querySelector('.word');
 const newWordContainer = document.querySelector('.add-word');
 
   const wordToGuess = "Canuts";
-  console.log(wordContainer);
-  console.log(wordInput);
 
   const addLetterClass = () => {
     wordInput.classList.add('input-word');
   }
 
   const addWord = (e) => {
-  e.preventDefault();
-  const inputWord = wordInput.value;
+    e.preventDefault();
   addLetterClass();
+  const inputWord = wordInput.value;
   populateWordContainer(inputWord, wordContainer);
   populateWordContainer(inputWord, newWordContainer);
+  if (inputWord.toUpperCase() !== wordToGuess.toUpperCase()) {
+    newWordContainer.classList.add('word');
+  } else {
+    alert('You Won!')
+  }
   wordInput.value = '';
 };
 
