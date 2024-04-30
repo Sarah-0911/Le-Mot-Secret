@@ -12,13 +12,14 @@ const newWordContainer = document.querySelector('.add-word');
   const addWord = (e) => {
     e.preventDefault();
   addLetterClass();
-  const inputWord = wordInput.value;
+  const inputWord = wordInput.value.toUpperCase();
   populateWordContainer(inputWord, wordContainer);
-  populateWordContainer(inputWord, newWordContainer);
-  if (inputWord.toUpperCase() !== wordToGuess.toUpperCase()) {
-    newWordContainer.classList.add('word');
-  } else {
+
+  if (inputWord === wordToGuess.toUpperCase()) {
     alert('You Won!')
+  } else {
+    newWordContainer.classList.add('word');
+    populateWordContainer(inputWord, newWordContainer);
   }
   wordInput.value = '';
 };
