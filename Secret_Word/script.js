@@ -48,14 +48,28 @@ const addWord = (e) => {
   addLetterClass();
   const inputWord = wordInput.value.toUpperCase();
 
-  if (wholeWord(wordOne).includes('.')) {
-    populateWordContainer(inputWord, rowOne);
-  } else if (rowOne.innerText === inputWord) {
-    populateWordContainer(inputWord, rowTwo);
-  }
+  for (let i = 1; i <= 5; i ++) {
+    const currentRow = document.querySelector(`.row-${i}`);
+    const letters = currentRow.querySelectorAll('.letter');
 
-  if (inputWord === wordToGuess.toUpperCase()) {
-    alert('You Won!')
+    let isRowEmpty = true;
+    letters.forEach(letter => {
+      if (letter.textContent !== '' && letter.textContent !== '.') {
+        isRowEmpty = false;
+      }
+    });
+
+    if (isRowEmpty) {
+      inputWord.split('').forEach((letter, index) => {
+        letters[index].textContent = letter;
+      });
+
+      if (inputWord === wordToGuess.toUpperCase()) {
+        alert('You Won!')
+      }
+
+      break;
+    }
   }
 
   wordInput.value = '';
@@ -63,11 +77,10 @@ const addWord = (e) => {
 
 
 const populateWordContainer = (wordInput, wordsContainer) => {
-  wordsContainer.innerHTML = wordInput.split('').map((letter, index) => {
+ wordsContainer.innerHTML = wordInput.split('').map((letter, index) => {
     return `<div data-index="${index}" class="letter">${letter}</div>`
   }).join('');
 };
 
 newWords.addEventListener('submit', addWord);
 wordInput.addEventListener('input', addLetterClass);
-// wordsContainer.forEach(word => word.addEventListener('submit', addWord));
