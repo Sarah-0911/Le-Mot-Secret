@@ -75,13 +75,13 @@ h1 {
   text-transform: uppercase;
 }
 
-.new-words {
+.new-word {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
-.new-words input {
+.new-word input {
   width: 100%;
   height: 40px;
   font-size: 1.2rem;
@@ -89,7 +89,7 @@ h1 {
   border: none;
 }
 
-.new-words button {
+.new-word button {
   display: flex;
   width: 42px;
   height: 42px;

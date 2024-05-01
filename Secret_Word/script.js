@@ -1,5 +1,5 @@
-const newWords = document.querySelector('.new-words');
-const wordInput = newWords.querySelector('input[name="word"]');
+const newWord = document.querySelector('.new-word');
+const wordInput = newWord.querySelector('input[name="word"]');
 const wordsContainer = document.querySelectorAll('.word');
 
 const rowOne = document.querySelector('.row-1');
@@ -18,34 +18,26 @@ console.log(wordsContainer);
 
 const wordToGuess = "Canuts";
 
-const addLetterClass = () => {
+const customizeWord = () => {
   wordInput.classList.add('input-word');
 }
 
-//   const addWord = (e) => {
-//   e.preventDefault();
-//   addLetterClass();
-//   const inputWord = wordInput.value.toUpperCase();
-//   populateWordContainer(inputWord, wordContainer);
+const correctLetter = letter => {
+  letter.style.backgroundColor = 'red';
+}
 
-//   if (inputWord === wordToGuess.toUpperCase()) {
-//     alert('You Won!')
-//   } else {
-//     newWordContainer.classList.add('word');
-//     populateWordContainer(inputWord, newWordContainer);
-//   };
-//   wordInput.value = '';
+const wrongPosLetter = letter => {
+  letter.style.backgroundColor = 'yellow';
+}
+
+// const wholeWord = (word) => {
+//   return Array.from(word).map(letter => letter.textContent).join('');
 // };
-
-const wholeWord = (word) => {
-  return Array.from(word).map(letter => letter.textContent).join('');
-};
-console.log(wholeWord(wordOne));
-
+// console.log(wholeWord(wordOne));
 
 const addWord = (e) => {
   e.preventDefault();
-  addLetterClass();
+  customizeWord();
   const inputWord = wordInput.value.toUpperCase();
 
   for (let i = 1; i <= 5; i ++) {
@@ -63,24 +55,14 @@ const addWord = (e) => {
       inputWord.split('').forEach((letter, index) => {
         letters[index].textContent = letter;
       });
-
       if (inputWord === wordToGuess.toUpperCase()) {
         alert('You Won!')
       }
-
       break;
-    }
-  }
-
+    };
+  };
   wordInput.value = '';
 };
 
-
-const populateWordContainer = (wordInput, wordsContainer) => {
- wordsContainer.innerHTML = wordInput.split('').map((letter, index) => {
-    return `<div data-index="${index}" class="letter">${letter}</div>`
-  }).join('');
-};
-
-newWords.addEventListener('submit', addWord);
-wordInput.addEventListener('input', addLetterClass);
+newWord.addEventListener('submit', addWord);
+wordInput.addEventListener('input', customizeWord);
