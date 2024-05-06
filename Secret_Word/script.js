@@ -16,21 +16,19 @@ const wordsContainer = document.querySelectorAll('.word');
 
 console.log(wordsContainer);
 
-const wordToGuess = "Canuts";
+const secretWord = "Canard";
+const wordToGuess = secretWord.toUpperCase();
 
 const customizeWord = () => {
   wordInput.classList.add('input-word');
 }
 
 const correctLetter = (letter, index) => {
-  if (wordToGuess.charAt(index) === letter.textContent) {
-    letter.style.backgroundColor = '#ff5a5a';
-  }
-}
-
-const wrongPosLetter = word => {
-  if (word.charAt(letter) === wordToGuess.charAt(letter)) {
-    letter.style.backgroundColor = 'yellow';
+  if (wordToGuess[index] === letter.textContent) {
+      letter.style.backgroundColor = '#ff5a5a';
+  } else if (wordToGuess.includes(letter.textContent)) {
+    letter.style.backgroundColor = '#ffe007';
+    letter.style.borderRadius = '50%';
   }
 }
 
@@ -61,6 +59,7 @@ const addWord = (e) => {
         letters[index].textContent = letter;
         correctLetter(letters[index], index);
       });
+
       if (inputWord === wordToGuess.toUpperCase()) {
         alert('You Won!')
       }
