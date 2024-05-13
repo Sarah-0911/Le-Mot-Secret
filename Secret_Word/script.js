@@ -2,46 +2,51 @@ const newWord = document.querySelector('.new-word');
 const wordInput = newWord.querySelector('input[name="word"]');
 const wordsContainer = document.querySelectorAll('.word');
 
-// const rowOne = document.querySelector('.row-1');
-// const rowTwo = document.querySelector('.row-2');
-// const rowThree = document.querySelector('.row-3');
-// const rowFour = document.querySelector('.row-4');
-// const rowFive = document.querySelector('.row-5');
-
-// const wordOne = rowOne.querySelectorAll('.letter');
-// const wordTwo = rowTwo.querySelectorAll('.letter');
-// const wordThree = rowThree.querySelectorAll('.letter');
-// const wordFour = rowFour.querySelectorAll('.letter');
-// const wordFive = rowFive.querySelectorAll('.letter');
-
-console.log(wordsContainer);
-
-const secretWord = "Canard";
-const wordToGuess = secretWord.toUpperCase();
+const wordsToGuess = "Canard";
+const secretWord = wordsToGuess.toUpperCase();
+let inputWord = '';
 
 const customizeWord = () => {
   wordInput.classList.add('input-word');
 }
 
-const correctLetter = (letter, index) => {
-  if (wordToGuess[index] === letter.textContent) {
-      letter.style.backgroundColor = '#ff5a5a';
-  } else if (wordToGuess.includes(letter.textContent)) {
-    letter.style.backgroundColor = '#ffe007';
+const checkWord = (letter, index) => {
+  const inputLetter = letter.textContent;
+  const isCorrectLetter = secretWord[index] === inputLetter;
+  let countInSecretWord = 0;
+  let countInInputWord = 0;
+
+  for (let i = 0; i < secretWord.length; i++) {
+    if (secretWord[i] === inputLetter) {
+      countInSecretWord++;
+    }
+  }
+
+  for (let i = 0; i < inputWord.length; i++) {
+    if (inputWord[i] === inputLetter) {
+      countInInputWord++;
+    }
+  }
+
+  if (isCorrectLetter) {
+    letter.style.backgroundColor = '#32d288';
+  } else if (secretWord.includes(inputLetter) && countInInputWord <= countInSecretWord) {
+    letter.style.backgroundColor = '#ffe741';
     letter.style.borderRadius = '50%';
   }
 }
 
+
 // const wholeWord = (word) => {
-//   return Array.from(word).map(letter => letter.textContent).join('');
-// };
-// console.log(wholeWord(wordOne));
+  //   return Array.from(word).map(letter => letter.textContent).join('');
+  // };
+  // console.log(wholeWord(wordOne));
 
 
 const addWord = (e) => {
   e.preventDefault();
   customizeWord();
-  const inputWord = wordInput.value.toUpperCase();
+  inputWord = wordInput.value.toUpperCase();
 
   for (let i = 1; i <= 5; i ++) {
     const currentRow = document.querySelector(`.row-${i}`);
@@ -57,10 +62,10 @@ const addWord = (e) => {
     if (isRowEmpty) {
       inputWord.split('').forEach((letter, index) => {
         letters[index].textContent = letter;
-        correctLetter(letters[index], index);
+        checkWord(letters[index], index);
       });
 
-      if (inputWord === wordToGuess.toUpperCase()) {
+      if (inputWord === secretWord.toUpperCase()) {
         alert('You Won!')
       }
       break;
