@@ -34,14 +34,11 @@ const checkWord = (letter, index) => {
     letter.style.backgroundColor = '#ffe741';
     letter.style.borderRadius = '50%';
   }
+
+  // if (countInInputWord > countInSecretWord) {
+  //   letter.style.backgroundColor = 'blue';
+  // }
 }
-
-
-// const wholeWord = (word) => {
-  //   return Array.from(word).map(letter => letter.textContent).join('');
-  // };
-  // console.log(wholeWord(wordOne));
-
 
 const addWord = (e) => {
   e.preventDefault();
