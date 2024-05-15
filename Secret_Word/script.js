@@ -10,34 +10,28 @@ const customizeWord = () => {
   wordInput.classList.add('input-word');
 }
 
+const countOfChars = word => {
+  const wordInObject = {};
+  [...word].forEach(char => {
+    if (!wordInObject[char]) {
+      wordInObject[char] = 0;
+    }
+    wordInObject[char]++;
+  })
+  return wordInObject;
+}
+
 const checkWord = (letter, index) => {
   const inputLetter = letter.textContent;
   const isCorrectLetter = secretWord[index] === inputLetter;
-  let countInSecretWord = 0;
-  let countInInputWord = 0;
-
-  for (let i = 0; i < secretWord.length; i++) {
-    if (secretWord[i] === inputLetter) {
-      countInSecretWord++;
-    }
-  }
-
-  for (let i = 0; i < inputWord.length; i++) {
-    if (inputWord[i] === inputLetter) {
-      countInInputWord++;
-    }
-  }
 
   if (isCorrectLetter) {
     letter.style.backgroundColor = '#32d288';
-  } else if (secretWord.includes(inputLetter) && countInInputWord <= countInSecretWord) {
+  } else if (secretWord.includes(inputLetter) && (countOfChars(secretWord)[inputLetter] || 0) > 0) {
     letter.style.backgroundColor = '#ffe741';
     letter.style.borderRadius = '50%';
+    countOfChars(secretWord)[inputLetter]--;
   }
-
-  // if (countInInputWord > countInSecretWord) {
-  //   letter.style.backgroundColor = 'blue';
-  // }
 }
 
 const addWord = (e) => {
