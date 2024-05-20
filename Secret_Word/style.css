@@ -106,3 +106,12 @@ h1 {
   text-align: center;
   letter-spacing: 14px;
 }
+
+.correct-position {
+  background-color: #32d288;
+}
+
+.incorrect-position {
+  background-color: #ffe741;
+  border-radius: 50%;
+}

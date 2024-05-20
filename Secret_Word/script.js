@@ -21,19 +21,30 @@ const countOfChars = word => {
   return wordInObject;
 }
 
-const checkWord = (letter, index, lettersCount) => {
+const isCorrectPosition = (letter, index) => {
   const inputLetter = letter.textContent;
   const isCorrectLetter = secretWord[index] === inputLetter;
 
-  if (isCorrectLetter) {
-    letter.style.backgroundColor = '#32d288';
-    lettersCount[inputLetter]--;
-  } else if (secretWord.includes(inputLetter) && (lettersCount[inputLetter] || 0) > 0) {
-    letter.style.backgroundColor = '#ffe741';
-    letter.style.borderRadius = '50%';
+  return isCorrectLetter;
+};
+
+const checkCorrectPosition = (letter, index, lettersCount) => {
+  const inputLetter = letter.textContent;
+
+  if (isCorrectPosition(letter, index)) {
+    letter.classList.add('correct-position');
     lettersCount[inputLetter]--;
   }
-}
+};
+
+const checkIncorrectPosition = (letter, index, lettersCount) => {
+  const inputLetter = letter.textContent;
+
+  if (!isCorrectPosition(letter, index) && secretWord.includes(inputLetter) && (lettersCount[inputLetter] || 0) > 0) {
+    letter.classList.add('incorrect-position');
+    lettersCount[inputLetter]--;
+  }
+};
 
 const addWord = (e) => {
   e.preventDefault();
@@ -53,9 +64,15 @@ const addWord = (e) => {
 
     if (isRowEmpty) {
       const lettersCount = countOfChars(secretWord);
+
       inputWord.split('').forEach((letter, index) => {
         letters[index].textContent = letter;
-        checkWord(letters[index], index, lettersCount);
+        checkCorrectPosition(letters[index], index, lettersCount);
+      });
+
+      inputWord.split('').forEach((letter, index) => {
+        letters[index].textContent = letter;
+        checkIncorrectPosition(letters[index], index, lettersCount);
       });
 
       if (inputWord === secretWord.toUpperCase()) {
