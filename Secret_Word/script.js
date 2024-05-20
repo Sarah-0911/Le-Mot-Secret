@@ -21,16 +21,17 @@ const countOfChars = word => {
   return wordInObject;
 }
 
-const checkWord = (letter, index) => {
+const checkWord = (letter, index, lettersCount) => {
   const inputLetter = letter.textContent;
   const isCorrectLetter = secretWord[index] === inputLetter;
 
   if (isCorrectLetter) {
     letter.style.backgroundColor = '#32d288';
-  } else if (secretWord.includes(inputLetter) && (countOfChars(secretWord)[inputLetter] || 0) > 0) {
+    lettersCount[inputLetter]--;
+  } else if (secretWord.includes(inputLetter) && (lettersCount[inputLetter] || 0) > 0) {
     letter.style.backgroundColor = '#ffe741';
     letter.style.borderRadius = '50%';
-    countOfChars(secretWord)[inputLetter]--;
+    lettersCount[inputLetter]--;
   }
 }
 
@@ -51,9 +52,10 @@ const addWord = (e) => {
     });
 
     if (isRowEmpty) {
+      const lettersCount = countOfChars(secretWord);
       inputWord.split('').forEach((letter, index) => {
         letters[index].textContent = letter;
-        checkWord(letters[index], index);
+        checkWord(letters[index], index, lettersCount);
       });
 
       if (inputWord === secretWord.toUpperCase()) {
