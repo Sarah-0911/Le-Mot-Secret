@@ -2,9 +2,11 @@ const newWord = document.querySelector('.new-word');
 const wordInput = newWord.querySelector('input[name="word"]');
 const wordsContainer = document.querySelectorAll('.word');
 
-const wordsToGuess = "Canard";
-const secretWord = wordsToGuess.toUpperCase();
-let inputWord = '';
+const randomWords = ['Canuts', 'Machon', 'Bugnes', 'Soyeux', 'Vorace'];
+const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
+
+// const wordToGuess = "Canard";
+const secretWord = wordToGuess.toUpperCase();
 
 const customizeWord = () => {
   wordInput.classList.add('input-word');
@@ -19,7 +21,7 @@ const countOfChars = word => {
     wordInObject[char]++;
   })
   return wordInObject;
-}
+};
 
 const isCorrectPosition = (letter, index) => {
   const inputLetter = letter.textContent;
@@ -49,7 +51,7 @@ const checkIncorrectPosition = (letter, index, lettersCount) => {
 const addWord = (e) => {
   e.preventDefault();
   customizeWord();
-  inputWord = wordInput.value.toUpperCase();
+  const inputWord = wordInput.value.toUpperCase();
 
   for (let i = 1; i <= 5; i ++) {
     const currentRow = document.querySelector(`.row-${i}`);
