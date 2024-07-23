@@ -2,15 +2,13 @@ const newWord = document.querySelector('.new-word');
 const wordInput = newWord.querySelector('input[name="word"]');
 
 const randomWords = ['Canuts', 'Machon', 'Bugnes', 'Soyeux', 'Vorace'];
-const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
+// const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
+const wordToGuess = 'canuts'
 
 const secretWord = wordToGuess.toUpperCase();
 
-
-const handleGame = (e) => {
-  e.preventDefault();
-  addWord();
-};
+let attemptCount = 0;
+const maxAttempts = 5;
 
 
 const countOfChars = (word) => {
@@ -45,22 +43,6 @@ const checkIncorrectPosition = (letter, index, secretLettersCount) => {
   }
 };
 
-const appendNextRow = (inputWord) => {
-  const nextRow = document.querySelector('.empty');
-
-  if (nextRow) {
-    const nextRowLetters = nextRow.querySelectorAll('.letter');
-    
-    inputWord.split('').forEach((letter, index) => {
-      if (isCorrectPosition({ textContent: letter }, index)) {
-        nextRowLetters[index].textContent = letter;
-      } else {
-        nextRowLetters[index].textContent = '.';
-      }
-    })
-  }
-};
-
 const addWord = () => {
   const inputWord = wordInput.value.toUpperCase();
   const emptyWord = document.querySelector('.empty');
@@ -75,23 +57,50 @@ const addWord = () => {
     setTimeout(() => {
       letters[index].textContent = letter;
       checkCorrectPosition(letters[index], index, secretLettersCount);
-      checkIncorrectPosition(letters[index], index, secretLettersCount);
-
-      if (index === inputWord.length - 1) {
-        appendNextRow(inputWord);
-      }
     }, index * 300);
   });
 
-  if (inputWord === secretWord.toUpperCase()) {
-    const msgInfo = document.querySelector('.msg-info');
+  inputWord.split('').forEach((letter, index) => {
     setTimeout(() => {
+      letters[index].textContent = letter;
+      checkIncorrectPosition(letters[index], index, secretLettersCount);
+      if (index === inputWord.length - 1 && inputWord !== secretWord.toUpperCase()) {
+        appendNextEmptyRow(inputWord);
+      }
+    }, inputWord.length * 300);
+  });
+
+  const msgInfo = document.querySelector('.msg-info');
+
+  setTimeout(() => {
+    attemptCount++;
+    if (inputWord === secretWord) {
       msgInfo.textContent = "🎉🎉🎉 You Won! 🎉🎉🎉"
       msgInfo.classList.add('show');
-    }, inputWord.length * 300)
-  }
+    } else if (attemptCount === maxAttempts) {
+      msgInfo.textContent = "Try again!"
+      msgInfo.classList.add('show');
+    }
+  }, inputWord.length * 300);
 
   wordInput.value = '';
 };
 
-newWord.addEventListener('submit', handleGame);
+const appendNextEmptyRow = (inputWord) => {
+  const nextEmptyRow = document.querySelector('.empty');
+  if (nextEmptyRow) {
+    const nextEmptyRowLetters = nextEmptyRow.querySelectorAll('.letter');
+    inputWord.split('').forEach((letter, index) => {
+      if (isCorrectPosition({ textContent: letter }, index)) {
+        nextEmptyRowLetters[index].textContent = letter;
+      } else {
+        nextEmptyRowLetters[index].textContent = '.';
+      }
+    })
+  }
+};
+
+newWord.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addWord();
+});
