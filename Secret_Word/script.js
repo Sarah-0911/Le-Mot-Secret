@@ -26,8 +26,7 @@ const countOfChars = (word) => {
 
 const isCorrectPosition = (letter, index) => {
   const inputLetter = letter.textContent;
-  const isCorrectLetter = secretWord[index] === inputLetter;
-  return isCorrectLetter;
+  return secretWord[index] === inputLetter;
 };
 
 const checkCorrectPosition = (letter, index, secretLettersCount) => {
@@ -46,6 +45,22 @@ const checkIncorrectPosition = (letter, index, secretLettersCount) => {
   }
 };
 
+const appendNextRow = (inputWord) => {
+  const nextRow = document.querySelector('.empty');
+
+  if (nextRow) {
+    const nextRowLetters = nextRow.querySelectorAll('.letter');
+    
+    inputWord.split('').forEach((letter, index) => {
+      if (isCorrectPosition({ textContent: letter }, index)) {
+        nextRowLetters[index].textContent = letter;
+      } else {
+        nextRowLetters[index].textContent = '.';
+      }
+    })
+  }
+};
+
 const addWord = () => {
   const inputWord = wordInput.value.toUpperCase();
   const emptyWord = document.querySelector('.empty');
@@ -61,6 +76,10 @@ const addWord = () => {
       letters[index].textContent = letter;
       checkCorrectPosition(letters[index], index, secretLettersCount);
       checkIncorrectPosition(letters[index], index, secretLettersCount);
+
+      if (index === inputWord.length - 1) {
+        appendNextRow(inputWord);
+      }
     }, index * 300);
   });
 
