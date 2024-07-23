@@ -1,19 +1,19 @@
 const newWord = document.querySelector('.new-word');
 const wordInput = newWord.querySelector('input[name="word"]');
-const wordsContainer = document.querySelectorAll('.word');
 
 const randomWords = ['Canuts', 'Machon', 'Bugnes', 'Soyeux', 'Vorace'];
 const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
 
-
-// const wordToGuess = "Canard";
 const secretWord = wordToGuess.toUpperCase();
 
-const customizeWord = () => {
-  wordInput.classList.add('input-word');
-}
 
-const countOfChars = word => {
+const handleGame = (e) => {
+  e.preventDefault();
+  addWord();
+};
+
+
+const countOfChars = (word) => {
   const wordInObject = {};
   [...word].forEach(char => {
     if (!wordInObject[char]) {
@@ -27,87 +27,52 @@ const countOfChars = word => {
 const isCorrectPosition = (letter, index) => {
   const inputLetter = letter.textContent;
   const isCorrectLetter = secretWord[index] === inputLetter;
-
   return isCorrectLetter;
 };
 
-const checkCorrectPosition = (letter, index, lettersCount) => {
+const checkCorrectPosition = (letter, index, secretLettersCount) => {
   const inputLetter = letter.textContent;
-
   if (isCorrectPosition(letter, index)) {
     letter.classList.add('correct-position');
-    lettersCount[inputLetter]--;
+    secretLettersCount[inputLetter]--;
   }
 };
 
-const checkIncorrectPosition = (letter, index, lettersCount) => {
+const checkIncorrectPosition = (letter, index, secretLettersCount) => {
   const inputLetter = letter.textContent;
-
-  if (!isCorrectPosition(letter, index) && secretWord.includes(inputLetter) && (lettersCount[inputLetter] || 0) > 0) {
+  if (!isCorrectPosition(letter, index) && secretWord.includes(inputLetter) && (secretLettersCount[inputLetter] || 0) > 0) {
     letter.classList.add('incorrect-position');
-    lettersCount[inputLetter]--;
+    secretLettersCount[inputLetter]--;
   }
 };
 
-const addWord = (e) => {
-  e.preventDefault();
-  customizeWord();
+const addWord = () => {
   const inputWord = wordInput.value.toUpperCase();
-
   const emptyWord = document.querySelector('.empty');
+
   if (!emptyWord) return;
   emptyWord.classList.remove('empty');
 
+  const secretLettersCount = countOfChars(secretWord);
   const letters = emptyWord.querySelectorAll('.letter');
 
-  const lettersCount = countOfChars(secretWord);
-
   inputWord.split('').forEach((letter, index) => {
-    letters[index].textContent = letter;
-    checkCorrectPosition(letters[index], index, lettersCount);
-  });
-
-  inputWord.split('').forEach((letter, index) => {
-    letters[index].textContent = letter;
-    checkIncorrectPosition(letters[index], index, lettersCount);
+    setTimeout(() => {
+      letters[index].textContent = letter;
+      checkCorrectPosition(letters[index], index, secretLettersCount);
+      checkIncorrectPosition(letters[index], index, secretLettersCount);
+    }, index * 300);
   });
 
   if (inputWord === secretWord.toUpperCase()) {
-    alert('You Won!')
+    const msgInfo = document.querySelector('.msg-info');
+    setTimeout(() => {
+      msgInfo.textContent = "🎉🎉🎉 You Won! 🎉🎉🎉"
+      msgInfo.classList.add('show');
+    }, inputWord.length * 300)
   }
 
-  // for (let i = 1; i <= 5; i ++) {
-  //   const currentRow = document.querySelectorAll('.word');
-  //   const letters = currentRow.querySelectorAll('.letter');
-
-  //   let isRowEmpty = true;
-  //   letters.forEach(letter => {
-  //     if (letter.textContent !== '' && letter.textContent !== '.') {
-  //       isRowEmpty = false;
-  //     }
-  //   });
-
-  //   if (isRowEmpty) {
-  //     const lettersCount = countOfChars(secretWord);
-
-  //     inputWord.split('').forEach((letter, index) => {
-  //       letters[index].textContent = letter;
-  //       checkCorrectPosition(letters[index], index, lettersCount);
-  //     });
-
-  //     inputWord.split('').forEach((letter, index) => {
-  //       letters[index].textContent = letter;
-  //       checkIncorrectPosition(letters[index], index, lettersCount);
-  //     });
-
-  //     if (inputWord === secretWord.toUpperCase()) {
-  //       alert('You Won!')
-  //     }
-  //     break;
-  //   };
-  // };
   wordInput.value = '';
 };
 
-newWord.addEventListener('submit', addWord);
-wordInput.addEventListener('input', customizeWord);
+newWord.addEventListener('submit', handleGame);
