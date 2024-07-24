@@ -2,8 +2,8 @@ const newWord = document.querySelector('.new-word');
 const wordInput = newWord.querySelector('input[name="word"]');
 
 const randomWords = ['Canuts', 'Machon', 'Bugnes', 'Soyeux', 'Vorace'];
-const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
-// const wordToGuess = 'canuts'
+// const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
+const wordToGuess = 'canuts'
 const secretWord = wordToGuess.toUpperCase();
 
 const words = document.querySelectorAll('.word');
@@ -74,27 +74,33 @@ const addWord = () => {
     }, inputWord.length * 300);
   });
 
-  const msgInfo = document.querySelector('.msg-info');
-
-  setTimeout(() => {
-    attemptCount++;
-    if (inputWord === secretWord) {
-      msgInfo.textContent = "🎉🎉🎉 You Won! 🎉🎉🎉"
-      msgInfo.classList.add('show');
-    } else if (attemptCount === maxAttempts) {
-      msgInfo.textContent = "Try again!"
-      msgInfo.classList.add('show');
-    }
-  }, inputWord.length * 300);
+  attemptCount++;
+  displayMsg(inputWord);
 
   wordInput.value = '';
 };
 
-const appendNextRow = (inputWord) => {
+
+const msgInfo = document.querySelector('.msg-info');
+
+const displayMsg = (word) => {
+  setTimeout(() => {
+    if (word === secretWord) {
+      msgInfo.textContent = "🎉🎉🎉 You Won! 🎉🎉🎉"
+      msgInfo.classList.add('show');
+      locked = true;
+    } else if (attemptCount === maxAttempts) {
+      msgInfo.textContent = "Try again!"
+      msgInfo.classList.add('show');
+    }
+  }, word.length * 300);
+};
+
+const appendNextRow = (checkedWord) => {
   const nextRow = document.querySelector('.empty');
   if (nextRow) {
     const nextRowLetters = nextRow.querySelectorAll('.letter');
-    inputWord.split('').forEach((letter, index) => {
+    checkedWord.split('').forEach((letter, index) => {
       if (isCorrectPosition({ textContent: letter }, index)) {
         nextRowLetters[index].textContent = letter;
       } else {
