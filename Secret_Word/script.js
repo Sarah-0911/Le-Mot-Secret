@@ -2,14 +2,13 @@ const newWord = document.querySelector('.new-word');
 const wordInput = newWord.querySelector('input[name="word"]');
 
 const randomWords = ['Canuts', 'Machon', 'Bugnes', 'Soyeux', 'Vorace'];
-// const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
-const wordToGuess = 'canuts'
-
+const wordToGuess = randomWords[Math.floor(Math.random() * randomWords.length)];
+// const wordToGuess = 'canuts'
 const secretWord = wordToGuess.toUpperCase();
 
+const words = document.querySelectorAll('.word');
 let attemptCount = 0;
-const maxAttempts = 5;
-
+const maxAttempts = words.length;
 
 const countOfChars = (word) => {
   const wordInObject = {};
@@ -43,15 +42,19 @@ const checkIncorrectPosition = (letter, index, secretLettersCount) => {
   }
 };
 
+let locked = false;
+
 const addWord = () => {
   const inputWord = wordInput.value.toUpperCase();
   const emptyWord = document.querySelector('.empty');
 
-  if (!emptyWord) return;
+  if (!emptyWord || locked) return;
   emptyWord.classList.remove('empty');
 
   const secretLettersCount = countOfChars(secretWord);
   const letters = emptyWord.querySelectorAll('.letter');
+
+  locked = true;
 
   inputWord.split('').forEach((letter, index) => {
     setTimeout(() => {
@@ -65,8 +68,9 @@ const addWord = () => {
       letters[index].textContent = letter;
       checkIncorrectPosition(letters[index], index, secretLettersCount);
       if (index === inputWord.length - 1 && inputWord !== secretWord.toUpperCase()) {
-        appendNextEmptyRow(inputWord);
+        appendNextRow(inputWord);
       }
+      locked = false;
     }, inputWord.length * 300);
   });
 
@@ -86,15 +90,15 @@ const addWord = () => {
   wordInput.value = '';
 };
 
-const appendNextEmptyRow = (inputWord) => {
-  const nextEmptyRow = document.querySelector('.empty');
-  if (nextEmptyRow) {
-    const nextEmptyRowLetters = nextEmptyRow.querySelectorAll('.letter');
+const appendNextRow = (inputWord) => {
+  const nextRow = document.querySelector('.empty');
+  if (nextRow) {
+    const nextRowLetters = nextRow.querySelectorAll('.letter');
     inputWord.split('').forEach((letter, index) => {
       if (isCorrectPosition({ textContent: letter }, index)) {
-        nextEmptyRowLetters[index].textContent = letter;
+        nextRowLetters[index].textContent = letter;
       } else {
-        nextEmptyRowLetters[index].textContent = '.';
+        nextRowLetters[index].textContent = '.';
       }
     })
   }
