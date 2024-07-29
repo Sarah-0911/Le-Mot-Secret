@@ -1,5 +1,14 @@
 let secretWord = '';
 
+const guessForm = document.querySelector('.guess-form');
+const wordEntry = guessForm.querySelector('.word-entry');
+
+const msgInfo = document.querySelector('.msg-info');
+
+const words = document.querySelectorAll('.word');
+let attemptCount = 0;
+const maxAttempts = words.length;
+
 const fetchWord = async() => {
   const url = `https://trouve-mot.fr/api/size/6`;
 
@@ -21,7 +30,11 @@ const initializeGame = async() => {
   const wordToFind = await fetchWord();
 
   if(wordToFind) {
-    secretWord = wordToFind.toUpperCase();
+    secretWord = wordToFind
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .toUpperCase();
+
     console.log(secretWord);
     setupGame();
   } else {
@@ -30,13 +43,6 @@ const initializeGame = async() => {
 };
 
 const setupGame = () => {
-  const newWord = document.querySelector('.new-word');
-  const wordInput = newWord.querySelector('input[name="word"]');
-
-  const words = document.querySelectorAll('.word');
-  let attemptCount = 0;
-  const maxAttempts = words.length;
-
 
   const countOfChars = (word) => {
     const wordInObject = {};
@@ -75,7 +81,7 @@ const setupGame = () => {
   let locked = false;
 
   const addWord = () => {
-    const inputWord = wordInput.value.toUpperCase();
+    const inputWord = wordEntry.value.toUpperCase();
     const emptyWord = document.querySelector('.empty');
 
     if (!emptyWord || locked) return;
@@ -107,20 +113,18 @@ const setupGame = () => {
     attemptCount++;
     displayMsg(inputWord);
 
-    wordInput.value = '';
+    wordEntry.value = '';
   };
-
-  const msgInfo = document.querySelector('.msg-info');
 
   const displayMsg = (word) => {
     setTimeout(() => {
       if (word === secretWord) {
         msgInfo.textContent = "🎉🎉🎉 Tu as gagné! 🎉🎉🎉"
-        msgInfo.classList.add('show');
+        msgInfo.classList.add('active');
         locked = true;
       } else if (attemptCount === maxAttempts) {
         msgInfo.textContent = "Tu as perdu 💩"
-        msgInfo.classList.add('show');
+        msgInfo.classList.add('active');
       }
     }, word.length * 300);
   };
@@ -139,7 +143,7 @@ const setupGame = () => {
     }
   };
 
-  newWord.addEventListener('submit', (e) => {
+  guessForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addWord();
   });
