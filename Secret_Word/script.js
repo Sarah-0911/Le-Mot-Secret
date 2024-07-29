@@ -1,3 +1,5 @@
+import { winDotLottie } from './animation.js';
+
 let secretWord = '';
 
 const guessForm = document.querySelector('.guess-form');

@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@lottiefiles/dotlottie-web": "^0.29.2"
+  },
+  "name": "secret_word",
+  "version": "1.0.0",
+  "main": "script.js",
+  "devDependencies": {
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

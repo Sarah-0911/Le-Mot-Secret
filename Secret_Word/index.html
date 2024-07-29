@@ -9,7 +9,10 @@
 <body>
  <h1>le mot secret</h1>
  <main class="main-container">
-   <p class="msg-info"></p>
+
+  <canvas id="win-dotLottie-canvas"></canvas>
+  
+  <p class="msg-info"></p>
    <div class="game-container">
     <div class="words-grid">
       <div class="word empty">
@@ -59,7 +62,8 @@
     </form>
   </div>
 </main>
- <script src="script.js"></script>
+<script type="module" src="animation.js"></script>
+<script type="module" src="script.js"></script>
  <script src="wordValidator.js"></script>
 </body>
 </html>
