@@ -1,3 +1,4 @@
+import { fetchWord } from './utils/fetchWordApi.js';
 import { initializeWinAnimation, initializeLoseAnimation } from './animation.js';
 
 let secretWord = '';
@@ -6,27 +7,15 @@ const guessForm = document.querySelector('.guess-form');
 const wordEntry = guessForm.querySelector('.word-entry');
 const msgInfo = document.querySelector('.msg-info');
 const words = document.querySelectorAll('.word');
-let attemptCount = 0;
+
+let attemptWord = 0;
 const maxAttempts = words.length;
 
-const fetchWord = async() => {
-  const url = `https://trouve-mot.fr/api/size/6`;
 
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) throw new Error(`Error: ${response.status} : ${response.statusText}`);
-
-    const data = await response.json();
-    console.log(data[0].categorie);
-    return data[0].name;
-
-  } catch (error) {
-    console.log(error);
-  }
-};
+// --- Fetch formated SecretWord ---
 
 const initializeGame = async() => {
+
   const wordToFind = await fetchWord();
 
   if(wordToFind) {
@@ -34,26 +23,29 @@ const initializeGame = async() => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g,'')
     .toUpperCase();
-
     console.log(secretWord);
+
     setupGame();
+
   } else {
     console.log('Failed to fetch');
   }
 };
+initializeGame();
 
+// --- Play Game ---
 
 const setupGame = () => {
 
-  const countOfChars = (word) => {
-    const wordInObject = {};
-    [...word].forEach(char => {
-      if (!wordInObject[char]) {
-        wordInObject[char] = 0;
+  const countOfLetters = (word) => {
+    const wordLettersCount = {};
+    [...word].forEach(letter => {
+      if (!wordLettersCount[letter]) {
+        wordLettersCount[letter] = 0;
       }
-      wordInObject[char]++;
+      wordLettersCount[letter]++;
     })
-    return wordInObject;
+    return wordLettersCount;
   };
 
   const isCorrectPosition = (letter, index) => {
@@ -88,7 +80,7 @@ const setupGame = () => {
     if (!emptyWord || locked) return;
     emptyWord.classList.remove('empty');
 
-    const secretLettersCount = countOfChars(secretWord);
+    const secretLettersCount = countOfLetters(secretWord);
     const letters = emptyWord.querySelectorAll('.letter');
 
     locked = true;
@@ -111,7 +103,7 @@ const setupGame = () => {
       }, inputWord.length * 300);
     });
 
-    attemptCount++;
+    attemptWord++;
     displayMsg(inputWord);
 
     wordEntry.value = '';
@@ -129,10 +121,9 @@ const setupGame = () => {
         winCanvas.classList.add('active');
 
         initializeWinAnimation();
-
         locked = true;
 
-      } else if (attemptCount === maxAttempts) {
+      } else if (attemptWord === maxAttempts) {
         msgInfo.textContent = "Tu as perdu 💩"
         msgInfo.classList.add('active');
 
@@ -162,6 +153,5 @@ const setupGame = () => {
     e.preventDefault();
     addWord();
   });
-};
 
-initializeGame();
+};
