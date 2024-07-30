@@ -1,4 +1,4 @@
-import { initializeWinAnimation } from './animation.js';
+import { initializeWinAnimation, initializeLoseAnimation } from './animation.js';
 
 let secretWord = '';
 
@@ -135,6 +135,11 @@ const setupGame = () => {
       } else if (attemptCount === maxAttempts) {
         msgInfo.textContent = "Tu as perdu 💩"
         msgInfo.classList.add('active');
+
+        const loseCanvas = document.querySelector("#lose-dotLottie-canvas");
+        loseCanvas.classList.add('active');
+
+        initializeLoseAnimation();
       }
     }, word.length * 300);
   };

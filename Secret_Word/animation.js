@@ -20,4 +20,24 @@ export const initializeWinAnimation = () => {
   return winDotLottie;
 };
 
+export const initializeLoseAnimation = () => {
+  const loseCanvas = document.querySelector("#lose-dotLottie-canvas");
+
+  if (!loseCanvas) {
+      console.error('Canvas element not found');
+      return null;
+  }
+
+  const loseSrc = "https://lottie.host/21bd2f1f-30ef-4dab-a770-c07d0f7314ed/Rdfx5xk96d.json";
+
+  const loseDotLottie = new DotLottie({
+    canvas: loseCanvas,
+    src: loseSrc,
+    loop: true,
+    autoplay: true
+  });
+
+  return loseDotLottie;
+};
+
 // const windotLottie = initializeWinAnimation();

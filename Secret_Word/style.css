@@ -20,15 +20,14 @@ canvas {
   z-index: 10;
 }
 
-#win-dotLottie-canvas {
+#win-dotLottie-canvas, #lose-dotLottie-canvas {
   position: absolute;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
 }
 
-#win-dotLottie-canvas.active {
+#win-dotLottie-canvas.active, #lose-dotLottie-canvas.active {
   display: block;
 }
 
@@ -130,7 +129,7 @@ h1 {
   background-color: #FFEAEE;
 }
 
-.guess-form button {
+.guess-form #submit {
   display: flex;
   cursor: pointer;
   width: 42px;
@@ -140,8 +139,9 @@ h1 {
   align-items: center;
   background-color: #4b79a1;
   border-color: #283E51;
-  border-radius: 2px;
+  border-radius: 5px;
 }
+
 
 .word-entry {
   text-transform: uppercase;
