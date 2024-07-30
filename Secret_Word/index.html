@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Secret Word</title>
+  <title>Le Mot Secret</title>
 </head>
 <body>
  <h1>le mot secret</h1>
  <main class="main-container">
 
-  <canvas id="win-dotLottie-canvas"></canvas>
-  
+  <canvas id="win-dotLottie-canvas" width="80" height="80"></canvas>
+
   <p class="msg-info"></p>
    <div class="game-container">
     <div class="words-grid">
@@ -60,6 +60,7 @@
       <input class="word-entry" name="word" type="text" minlength="6" maxlength="6" autocomplete="off">
       <button id="submit" type="submit">🥸</button>
     </form>
+    <button id="clue">Indice</button>
   </div>
 </main>
 <script type="module" src="animation.js"></script>

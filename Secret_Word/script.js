@@ -1,12 +1,10 @@
-import { winDotLottie } from './animation.js';
+import { handleWinAnimation } from './animation.js';
 
 let secretWord = '';
 
 const guessForm = document.querySelector('.guess-form');
 const wordEntry = guessForm.querySelector('.word-entry');
-
 const msgInfo = document.querySelector('.msg-info');
-
 const words = document.querySelectorAll('.word');
 let attemptCount = 0;
 const maxAttempts = words.length;
@@ -43,6 +41,7 @@ const initializeGame = async() => {
     console.log('Failed to fetch');
   }
 };
+
 
 const setupGame = () => {
 
@@ -118,12 +117,22 @@ const setupGame = () => {
     wordEntry.value = '';
   };
 
+  
   const displayMsg = (word) => {
+
     setTimeout(() => {
       if (word === secretWord) {
-        msgInfo.textContent = "🎉🎉🎉 Tu as gagné! 🎉🎉🎉"
+        msgInfo.textContent = "🎉🎉🎉 Tu as gagné! 🎉🎉🎉";
         msgInfo.classList.add('active');
+
+        const winCanvas = document.querySelector("#win-dotLottie-canvas");
+        winCanvas.classList.add('active');
+
+        const winDotLottie = handleWinAnimation();
+        winDotLottie.play();
+
         locked = true;
+
       } else if (attemptCount === maxAttempts) {
         msgInfo.textContent = "Tu as perdu 💩"
         msgInfo.classList.add('active');
