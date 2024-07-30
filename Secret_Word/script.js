@@ -1,4 +1,4 @@
-import { handleWinAnimation } from './animation.js';
+import { initializeWinAnimation } from './animation.js';
 
 let secretWord = '';
 
@@ -117,7 +117,7 @@ const setupGame = () => {
     wordEntry.value = '';
   };
 
-  
+
   const displayMsg = (word) => {
 
     setTimeout(() => {
@@ -128,8 +128,7 @@ const setupGame = () => {
         const winCanvas = document.querySelector("#win-dotLottie-canvas");
         winCanvas.classList.add('active');
 
-        const winDotLottie = handleWinAnimation();
-        winDotLottie.play();
+        initializeWinAnimation();
 
         locked = true;
 
