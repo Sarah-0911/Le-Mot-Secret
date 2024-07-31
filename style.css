@@ -25,6 +25,8 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+  transition: display 0.4s ease-out;
+
 }
 
 #win-dotLottie-canvas.active, #lose-dotLottie-canvas.active {
@@ -37,7 +39,7 @@ h1 {
   text-align: center;
   font-variant: small-caps;
   letter-spacing: .3rem;
-  font-size: clamp(36px, 16vw, 42px);
+  font-size: clamp(36px, 4vw, 42px);
   border-bottom: 1px solid #fffea0;
   width: 70%;
   padding-bottom: 20px;
@@ -47,9 +49,8 @@ h1 {
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  position: relative;
   margin: 0 auto;
   max-width: 70vw;
   height: 76vh;
@@ -63,7 +64,6 @@ h1 {
   font-weight: 500;
   letter-spacing: 1px;
   color: #f1f1f1;
-  position: absolute;
   top: 30px;
   transition: opacity 0.4s ease-out;
   opacity: 0;
@@ -102,7 +102,7 @@ h1 {
   width: 34px;
   height: 34px;
   border-radius: 2px;
-  background-color: #FFEAEE;
+  background-color: #f1f1f1;
   border: 1px solid grey;
   font-family: "Schibsted Grotesk", sans-serif;
   font-weight: 500;
@@ -126,7 +126,7 @@ h1 {
   border-radius: 4px;
   border: none;
   outline: none;
-  background-color: #FFEAEE;
+  background-color: #f1f1f1;
 }
 
 .guess-form #submit {
@@ -156,4 +156,23 @@ h1 {
 .incorrect-position {
   background-color: #FFF275;
   border-radius: 50%;
+}
+
+
+@media (max-width: 576px) {
+  .main-container {
+    max-width: 86vw;
+    height: 60vh;
+    margin: 40px auto 0;
+  }
+
+  .msg-info {
+    font-size: clamp(14px, 5vw, 20px);
+    top: 60px;
+  }
+
+  canvas {
+    width: 160px;
+    height: 160px;
+  }
 }
