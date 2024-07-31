@@ -37,6 +37,22 @@ initializeGame();
 
 const setupGame = () => {
 
+  const validateInput = () => {
+    if (wordEntry.value.length !== 6) {
+      wordEntry.setCustomValidity('Ton mot doit comporter 6 lettres !');
+    } else {
+      wordEntry.setCustomValidity('');
+    }
+  };
+
+  wordEntry.addEventListener('input', () => {
+    validateInput();
+    if (wordEntry.checkValidity()) {
+      wordEntry.setCustomValidity('');
+    }
+  });
+
+
   const countOfLetters = (word) => {
     const wordLettersCount = {};
     [...word].forEach(letter => {
@@ -109,7 +125,6 @@ const setupGame = () => {
     wordEntry.value = '';
   };
 
-
   const displayMsg = (word) => {
 
     setTimeout(() => {
@@ -153,5 +168,4 @@ const setupGame = () => {
     e.preventDefault();
     addWord();
   });
-
 };

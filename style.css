@@ -25,12 +25,13 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
-  transition: display 0.4s ease-out;
-
+  transition: opacity 0.4s ease-out;
+  opacity: 0;
 }
 
 #win-dotLottie-canvas.active, #lose-dotLottie-canvas.active {
   display: block;
+  opacity: 1;
 }
 
 h1 {
