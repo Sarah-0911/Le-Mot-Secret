@@ -7,6 +7,7 @@ const guessForm = document.querySelector('.guess-form');
 const wordEntry = guessForm.querySelector('.word-entry');
 const msgInfo = document.querySelector('.msg-info');
 const words = document.querySelectorAll('.word');
+const answer = document.querySelector('.answer');
 
 let attemptWord = 0;
 const maxAttempts = words.length;
@@ -141,6 +142,9 @@ const setupGame = () => {
       } else if (attemptWord === maxAttempts) {
         msgInfo.textContent = "Tu as perdu 💩"
         msgInfo.classList.add('active');
+
+        answer.innerHTML = `La réponse était <span>${secretWord}</span>.`
+        answer.classList.add('active');
 
         const loseCanvas = document.querySelector("#lose-dotLottie-canvas");
         loseCanvas.classList.add('active');
