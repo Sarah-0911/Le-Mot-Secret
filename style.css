@@ -61,7 +61,6 @@ h1 {
 }
 
 .hint-container {
-  /* border: solid red; */
   position: absolute;
   cursor: pointer;
   top: -50px;
@@ -95,7 +94,7 @@ h1 {
   position: absolute;
   top: 30px;
   opacity: 0;
-  transform: translateY(-140%);
+  transform: translateY(-44%);
   transition: transform 1s ease-out, opacity 1s ease-out;
 }
 .category-modal span {

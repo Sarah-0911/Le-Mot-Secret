@@ -47,16 +47,20 @@ initializeGame();
 // --- Display hint ---
 
 const categoryModal = document.querySelector('.category-modal');
+let locked = false;
 
 const displayHint = (category) => {
   categoryModal.innerHTML = `Catégorie:<br/><span>${category}</span>`;
 
   hintContainer.addEventListener('click', () => {
+    if (locked) return;
     categoryModal.classList.add('active');
+    locked = true;
 
     setTimeout(() => {
       categoryModal.classList.remove('active');
     }, 3000)
+    locked = false;
   })
 };
 
