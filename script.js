@@ -1,13 +1,18 @@
 import { fetchWord } from './utils/fetchWordApi.js';
 import { initializeWinAnimation, initializeLoseAnimation } from './animation.js';
 
-let secretWord = '';
+const hintContainer = document.querySelector('.hint-container');
+const categoryModal = document.querySelector('.category-modal');
+
+const msgInfo = document.querySelector('.msg-info');
+const answer = document.querySelector('.answer');
+
+const words = document.querySelectorAll('.word');
 
 const guessForm = document.querySelector('.guess-form');
 const wordEntry = guessForm.querySelector('.word-entry');
-const msgInfo = document.querySelector('.msg-info');
-const words = document.querySelectorAll('.word');
-const answer = document.querySelector('.answer');
+
+let secretWord = '';
 
 let attemptWord = 0;
 const maxAttempts = words.length;
@@ -130,6 +135,8 @@ const setupGame = () => {
 
     setTimeout(() => {
       if (word === secretWord) {
+        hintContainer.style.display = 'none';
+
         msgInfo.textContent = "🎉🎉🎉 Tu as gagné! 🎉🎉🎉";
         msgInfo.classList.add('active');
 
@@ -140,6 +147,8 @@ const setupGame = () => {
         locked = true;
 
       } else if (attemptWord === maxAttempts) {
+        hintContainer.style.display = 'none';
+
         msgInfo.textContent = "Tu as perdu 💩"
         msgInfo.classList.add('active');
 

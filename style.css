@@ -84,6 +84,21 @@ h1 {
   font-weight: 900;
 }
 
+.category-modal {
+  background-color: #f1f1f1;
+  font-family: "Schibsted Grotesk", sans-serif;
+  text-align: center;
+  padding: 8px 18px;
+  border-radius: 2px;
+  line-height: 1.6;
+  position: absolute;
+  top: 12px;
+}
+
+.category-modal span {
+  font-weight: 600;
+}
+
 .msg-info {
   font-size: clamp(14px, 4vw, 20px);
   font-family: "Schibsted Grotesk", sans-serif;
