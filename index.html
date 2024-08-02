@@ -13,6 +13,18 @@
   <canvas id="win-dotLottie-canvas"></canvas>
   <canvas id="lose-dotLottie-canvas"></canvas>
 
+  <div class="hint-container">
+    <dotlottie-player
+      class="hint-dotlottie"
+      src="https://lottie.host/f5ad81f9-6794-4953-9c04-da8bd3147624/8sevuoxeAe.json"
+      background="transparent"
+      speed="1"
+      loop
+      autoplay>
+    </dotlottie-player>
+    <p class="hint">indice</p>
+  </div>
+
   <p class="msg-info"></p>
   <p class="answer"></p>
    <div class="game-container">
@@ -64,6 +76,7 @@
     </form>
    </div>
 </main>
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <script type="module" src="script.js"></script>
 <script src="wordValidator.js"></script>
 </body>

@@ -57,6 +57,31 @@ h1 {
   height: 76vh;
   background: #232528;
   border-radius: 4px;
+  position: relative;
+}
+
+.hint-container {
+  /* border: solid red; */
+  position: absolute;
+  cursor: pointer;
+  top: -50px;
+  right: -10px;
+  opacity: .9;
+}
+
+.hint-dotlottie {
+  width: 100px;
+  height: 100px;
+  padding: 4px;
+}
+
+.hint {
+  font-family: "Megrim", system-ui;
+  text-align: center;
+  color: #f1f1f1;
+  font-variant: small-caps;
+  letter-spacing: 1.2px;
+  font-weight: 900;
 }
 
 .msg-info {
@@ -176,7 +201,7 @@ h1 {
 @media (max-width: 576px) {
   .main-container {
     max-width: 86vw;
-    height: 60vh;
+    height: 58vh;
     margin: 40px auto 0;
   }
 
