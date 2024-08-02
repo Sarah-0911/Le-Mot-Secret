@@ -2,7 +2,6 @@ import { fetchWord } from './utils/fetchWordApi.js';
 import { initializeWinAnimation, initializeLoseAnimation } from './animation.js';
 
 const hintContainer = document.querySelector('.hint-container');
-const categoryModal = document.querySelector('.category-modal');
 
 const msgInfo = document.querySelector('.msg-info');
 const answer = document.querySelector('.answer');
@@ -18,18 +17,23 @@ let attemptWord = 0;
 const maxAttempts = words.length;
 
 
-// --- Fetch formated SecretWord ---
+// --- Fetch formated wordData ---
 
 const initializeGame = async() => {
 
-  const wordToFind = await fetchWord();
+  const wordData = await fetchWord();
 
-  if(wordToFind) {
-    secretWord = wordToFind
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'')
-    .toUpperCase();
+  if(wordData) {
+    const { name, category } = wordData;
+    console.log(category);
+
+    secretWord = name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'')
+      .toUpperCase();
     console.log(secretWord);
+
+    displayHint(category);
 
     setupGame();
 
@@ -38,6 +42,24 @@ const initializeGame = async() => {
   }
 };
 initializeGame();
+
+
+// --- Display hint ---
+
+const categoryModal = document.querySelector('.category-modal');
+
+const displayHint = (category) => {
+  categoryModal.innerHTML = `Catégorie:<br/><span>${category}</span>`;
+
+  hintContainer.addEventListener('click', () => {
+    categoryModal.classList.add('active');
+
+    setTimeout(() => {
+      categoryModal.classList.remove('active');
+    }, 3000)
+  })
+};
+
 
 // --- Play Game ---
 
@@ -57,7 +79,6 @@ const setupGame = () => {
       wordEntry.setCustomValidity('');
     }
   });
-
 
   const countOfLetters = (word) => {
     const wordLettersCount = {};

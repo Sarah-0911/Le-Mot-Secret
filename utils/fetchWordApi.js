@@ -7,8 +7,12 @@ export const fetchWord = async() => {
     if (!response.ok) throw new Error(`Error: ${response.status} : ${response.statusText}`);
 
     const data = await response.json();
-    console.log(data[0].categorie);
-    return data[0].name;
+
+    const wordData = {
+      name: data[0].name,
+      category: data[0].categorie
+    }
+    return wordData;
 
   } catch (error) {
     console.log(error);

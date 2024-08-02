@@ -86,17 +86,26 @@ h1 {
 
 .category-modal {
   background-color: #f1f1f1;
+  color: #232528;
   font-family: "Schibsted Grotesk", sans-serif;
   text-align: center;
   padding: 8px 18px;
   border-radius: 2px;
   line-height: 1.6;
   position: absolute;
-  top: 12px;
+  top: 30px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-140%);
+  transition: transform 1s ease-out, opacity 1s ease-out;
 }
-
 .category-modal span {
   font-weight: 600;
+}
+
+.category-modal.active {
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .msg-info {
