@@ -46,21 +46,22 @@ initializeGame();
 
 // --- Display hint ---
 
-const categoryModal = document.querySelector('.category-modal');
+const hintModal = document.querySelector('.hint-modal');
 let locked = false;
 
 const displayHint = (category) => {
-  categoryModal.innerHTML = `Catégorie:<br/><span>${category}</span>`;
+  hintModal.innerHTML = `- catégorie -<br/><span>${category}</span>`;
 
   hintContainer.addEventListener('click', () => {
     if (locked) return;
-    categoryModal.classList.add('active');
+    hintModal.classList.add('active');
+    hintContainer.style.display = 'none';
     locked = true;
 
     setTimeout(() => {
-      categoryModal.classList.remove('active');
+      hintModal.classList.remove('active');
+      locked = false;
     }, 3000)
-    locked = false;
   })
 };
 

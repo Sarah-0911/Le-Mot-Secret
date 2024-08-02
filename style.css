@@ -83,25 +83,28 @@ h1 {
   font-weight: 900;
 }
 
-.category-modal {
-  background-color: #f1f1f1;
+.hint-modal {
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+  background: -webkit-linear-gradient(to right, #ece9e6, #ffffff);
   color: #232528;
+  font-variant: small-caps;
   font-family: "Schibsted Grotesk", sans-serif;
   text-align: center;
   padding: 8px 18px;
-  border-radius: 2px;
-  line-height: 1.6;
+  border-radius: 16px;
+  line-height: 1.4;
   position: absolute;
   top: 30px;
   opacity: 0;
   transform: translateY(-44%);
   transition: transform 1s ease-out, opacity 1s ease-out;
 }
-.category-modal span {
+.hint-modal span {
   font-weight: 600;
+  font-size: .8rem;
 }
 
-.category-modal.active {
+.hint-modal.active {
   opacity: 1;
   transform: translateY(0);
 }
