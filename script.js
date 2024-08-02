@@ -63,6 +63,18 @@ const displayHint = (category) => {
       locked = false;
     }, 3000)
   })
+
+  hintContainer.addEventListener('touchstart', () => {
+    if (locked) return;
+    hintModal.classList.add('active');
+    hintContainer.style.display = 'none';
+    locked = true;
+
+    setTimeout(() => {
+      hintModal.classList.remove('active');
+      locked = false;
+    }, 3000)
+  })
 };
 
 
