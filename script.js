@@ -116,9 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
+    const inputWords = [];
+
     const addWord = () => {
+
       const inputWord = wordEntry.value.toUpperCase();
       const emptyWord = document.querySelector('.empty');
+
+      inputWords.push(inputWord);
 
       if (!emptyWord || locked) return;
       emptyWord.classList.remove('empty');
@@ -140,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
           letters[index].textContent = letter;
           checkIncorrectPosition(letters[index], index, secretLettersCount);
           if (index === inputWord.length - 1 && inputWord !== secretWord.toUpperCase()) {
-            appendNextRow(inputWord);
+            appendNextRow(inputWords);
           }
           locked = false;
         }, inputWord.length * 300);
@@ -151,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       wordEntry.value = '';
     };
+
 
     const displayMsg = (word) => {
       setTimeout(() => {
@@ -182,17 +188,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }, word.length * 300);
     };
 
-    const appendNextRow = (checkedWord) => {
+    const appendNextRow = (checkedWords) => {
       const nextRow = document.querySelector('.empty');
+
       if (nextRow) {
         const nextRowLetters = nextRow.querySelectorAll('.letter');
-        checkedWord.split('').forEach((letter, index) => {
-          if (isCorrectPosition({ textContent: letter }, index)) {
-            nextRowLetters[index].textContent = letter;
-          } else {
-            nextRowLetters[index].textContent = '.';
-          }
-        });
+        nextRowLetters.forEach(letter => letter.textContent = '.');
+
+        checkedWords.forEach(checkedWord => {
+          checkedWord.split('').forEach((letter, index) => {
+            if (isCorrectPosition({ textContent: letter }, index)) {
+              nextRowLetters[index].textContent = letter;
+            }
+          });
+        })
       }
     };
 
