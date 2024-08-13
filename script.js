@@ -2,10 +2,6 @@ import { fetchWord } from './utils/fetchWordApi.js';
 import { initializeWinAnimation, initializeLoseAnimation } from './animation.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hintContainer = document.querySelector('.hint-container');
-  const hintModal = document.querySelector('.hint-modal');
-  const msgInfo = document.querySelector('.msg-info');
-  const answer = document.querySelector('.answer');
   const words = document.querySelectorAll('.word');
   const guessForm = document.querySelector('.guess-form');
   const wordEntry = guessForm.querySelector('.word-entry');
@@ -16,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let locked = false;
 
   // --- Display hint ---
+  const hintContainer = document.querySelector('.hint-container');
+  const hintModal = document.querySelector('.hint-modal');
+
   const displayHint = (category) => {
     hintModal.innerHTML = `- catégorie -<br/><span>${category}</span>`;
 
@@ -119,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputWords = [];
 
     const addWord = () => {
-
       const inputWord = wordEntry.value.toUpperCase();
       const emptyWord = document.querySelector('.empty');
 
@@ -157,6 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
       wordEntry.value = '';
     };
 
+    // --- Display final msg ---
+    const msgInfo = document.querySelector('.msg-info');
+    const answer = document.querySelector('.answer');
 
     const displayMsg = (word) => {
       setTimeout(() => {
