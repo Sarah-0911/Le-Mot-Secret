@@ -8,7 +8,7 @@ export const initializeWinAnimation = () => {
       return null;
   }
 
-  const winSrc = "https://lottie.host/9ac9c440-c19e-4ac9-b60e-869b6d0ef8cb/7h97gYMCNE.lottie";
+  const winSrc = "https://lottie.host/4b017b00-3e43-41a5-a63d-c83310acac83/PH3pDfagrf.json";
 
   const winDotLottie = new DotLottie({
     canvas: winCanvas,
